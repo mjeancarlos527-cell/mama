@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Día Mamá 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(145deg, #fce4ec 0%, #f8bbd0 40%, #fce4ec 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    overflow: hidden;
+    position: relative;
+  }
+  .hearts-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .heart-float {
+    position: absolute; font-size: 1.2rem; opacity: 0.15;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.15; }
+    90%  { opacity: 0.1; }
+    100% { transform: translateY(-10vh) rotate(20deg); opacity: 0; }
+  }
+  .title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    color: #c0394b;
+    text-shadow: 0 2px 8px rgba(192,57,75,0.2);
+    margin-bottom: 2rem;
+    position: relative; z-index: 1; letter-spacing: 2px;
+  }
+  .scene { position: relative; z-index: 1; perspective: 900px; }
+  .box-wrapper {
+    cursor: pointer; width: 240px; height: 240px;
+    position: relative; transition: transform 0.2s;
+  }
+  .box-wrapper:hover { transform: scale(1.04); }
+  .lid {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10; transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+  .lid-face {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #c0394b 0%, #9b2335 60%, #7d1a28 100%);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.18);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .lid-face::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+  }
+  .lid-ribbon-h {
+    position: absolute; width: 100%; height: 14px;
+    background: linear-gradient(to bottom, #f5c6cb, #ffe0e6, #f5c6cb);
+    top: 50%; transform: translateY(-50%);
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
+  }
+  .lid-ribbon-v {
+    position: absolute; height: 100%; width: 14px;
+    background: linear-gradient(to right, #f5c6cb, #ffe0e6, #f5c6cb);
+    left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
+  }
+  .lid-label {
+    position: absolute; width: 80px; height: 55px;
+    background: rgba(255,255,255,0.92);
+    border: 1.5px solid rgba(192,57,75,0.3); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Great Vibes', cursive; font-size: 1rem; color: #c0394b;
+    z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    line-height: 1.2; text-align: center; padding: 4px;
+  }
+  .box-bottom {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(160deg, #8b1a2a 0%, #6d1221 100%);
+    border-radius: 10px;
+    box-shadow: 0 16px 48px rgba(100,0,20,0.35), 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .box-bottom::after {
+    content: ''; position: absolute; inset: 4px;
+    border-radius: 7px; border: 1px solid rgba(255,255,255,0.07);
+  }
+  .chocolates-grid {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -40%);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; opacity: 0; transition: opacity 0.5s 0.5s; z-index: 5;
+  }
+  .box-open .chocolates-grid { opacity: 1; }
+  .choco {
+    width: 86px; height: 86px; border-radius: 10px; cursor: pointer;
+    position: relative; transition: transform 0.22s, box-shadow 0.22s;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
+  .choco:hover { transform: scale(1.12) translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.35); z-index: 10; }
+  .choco:active { transform: scale(0.96); }
+  .choco-1 { background: radial-gradient(circle at 35% 35%, #f5deb3, #d4a76a 50%, #a0672a); }
+  .choco-2 { background: radial-gradient(circle at 35% 35%, #ffe4e1, #f4a0a8 50%, #d46070); }
+  .choco-3 { background: radial-gradient(circle at 35% 35%, #fff8e7, #f5d78e 50%, #c9a02a); }
+  .choco-4 { background: radial-gradient(circle at 35% 35%, #fde8f0, #f5b8d0 50%, #d4608a); }
+  .choco-emoji { font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); user-select: none; }
+  .box-open .lid { transform: rotateX(-130deg); }
+  .click-hint {
+    margin-top: 1.4rem; font-family: 'Lora', serif; font-style: italic;
+    color: #b03050; font-size: 0.85rem; opacity: 0.8; letter-spacing: 0.5px;
+    transition: opacity 0.4s;
+  }
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(80, 0, 20, 0.55); backdrop-filter: blur(6px);
+    z-index: 100; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.45s;
+  }
+  .overlay.show { opacity: 1; pointer-events: all; }
+  .letter {
+    background: #fffaf6; border-radius: 18px; padding: 2.4rem 2.6rem 2rem;
+    max-width: 420px; width: 90vw; position: relative;
+    box-shadow: 0 30px 80px rgba(100,0,30,0.35);
+    transform: scale(0.8) translateY(30px); opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s;
+    border: 2px solid rgba(192,57,75,0.15); overflow: hidden;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .overlay.show .letter { transform: scale(1) translateY(0); opacity: 1; }
+  .letter::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(to right, #c0394b, #e87d8a, #c0394b);
+  }
+  .letter-icon { text-align: center; font-size: 2.8rem; margin-bottom: 0.8rem; animation: bounce 1s ease infinite alternate; }
+  @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+  .letter-title { font-family: 'Great Vibes', cursive; font-size: 2rem; color: #c0394b; text-align: center; margin-bottom: 0.8rem; }
+  .letter-divider { width: 60px; height: 2px; background: linear-gradient(to right, transparent, #e87d8a, transparent); margin: 0 auto 1.2rem; }
+  .letter-text { font-family: 'Lora', serif; font-size: 1.02rem; color: #5a2030; line-height: 1.75; text-align: center; font-style: italic; }
+  .photo-section { margin-top: 1.4rem; display: flex; flex-direction: column; align-items: center; }
+  .photo-frame { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .photo-frame img {
+    width: 100%; max-height: 220px; object-fit: cover; border-radius: 14px;
+    border: 4px solid #f5c6cb;
+    box-shadow: 0 6px 24px rgba(192,57,75,0.25), 0 0 0 1px rgba(192,57,75,0.1);
+  }
+  .photo-caption { font-family: 'Great Vibes', cursive; font-size: 1.1rem; color: #c0394b; opacity: 0.75; letter-spacing: 0.5px; }
+  .btn-close {
+    display: block; margin: 1.4rem auto 0; padding: 0.6rem 2rem;
+    background: linear-gradient(135deg, #c0394b, #9b2335); color: white;
+    border: none; border-radius: 50px; font-family: 'Lora', serif;
+    font-size: 0.9rem; cursor: pointer; letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(155,35,53,0.4); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-close:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(155,35,53,0.5); }
+  .btn-close:active { transform: scale(0.97); }
+  .sparkle { position: fixed; pointer-events: none; font-size: 1.2rem; z-index: 200; animation: sparkleAnim 1s forwards; }
+  @keyframes sparkleAnim {
+    0%   { opacity: 1; transform: scale(0) rotate(0deg); }
+    50%  { opacity: 1; transform: scale(1.4) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0) rotate(360deg) translateY(-60px); }
+  }
+  .watermark { margin-top: 1.6rem; font-family: 'Great Vibes', cursive; font-size: 0.85rem; color: rgba(192,57,75,0.35); text-align: center; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="hearts-bg" id="heartsBg"></div>
+<div class="title">Feliz Día Mamá</div>
+<div class="scene">
+  <div class="box-wrapper" id="boxWrapper">
+    <div class="box-bottom"></div>
+    <div class="chocolates-grid">
+      <div class="choco choco-1"><div class="choco-emoji">🍫</div></div>
+      <div class="choco choco-2"><div class="choco-emoji">🌸</div></div>
+      <div class="choco choco-3"><div class="choco-emoji">⭐</div></div>
+      <div class="choco choco-4"><div class="choco-emoji">💝</div></div>
+    </div>
+    <div class="lid" id="lid">
+      <div class="lid-face">
+        <div class="lid-ribbon-h"></div>
+        <div class="lid-ribbon-v"></div>
+        <div class="lid-label">Para<br>Mamá</div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="click-hint" id="clickHint">✨ Haz clic en la caja para abrirla ✨</p>
+<p class="watermark">con todo mi amor 💕</p>
+<div class="overlay" id="overlay">
+  <div class="letter">
+    <div class="letter-icon" id="letterIcon">💕</div>
+    <div class="letter-title" id="letterTitle"></div>
+    <div class="letter-divider"></div>
+    <p class="letter-text" id="letterText"></p>
+    <div class="photo-section">
+      <div class="photo-frame">
+        <img src="Gemini_Generated_Image_4nhqd04nhqd04nhq.png" alt="Feliz Día Mamá">
+        <span class="photo-caption">con todo mi amor 💕</span>
+      </div>
+    </div>
+    <button class="btn-close" id="btnClose">Cerrar 💌</button>
+  </div>
+</div>
+<script>
+  const heartsBg = document.getElementById('heartsBg');
+  const heartEmojis = ['💕','🌸','✨','💝','🌺','💖','🦋','🌷'];
+  for (let i = 0; i < 22; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-float';
+    h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (0.8 + Math.random() * 1.4) + 'rem';
+    h.style.animationDuration = (8 + Math.random() * 12) + 's';
+    h.style.animationDelay = (-Math.random() * 15) + 's';
+    heartsBg.appendChild(h);
+  }
+  const messages = [
+    { icon: '💖', title: 'Te Amo Infinito',       text: 'No hay palabras suficientes para describir cuánto te quiero. Feliz Día de las Madres, mamá. ¡Eres todo para mí!' },
+    { icon: '🌸', title: 'Gracias por Todo',       text: 'Mamá, gracias por tu amor incondicional y por siempre estar ahí para mí. Cada día te agradezco más en mi corazón.' },
+    { icon: '⭐', title: 'Eres Mi Inspiración',    text: 'Admiro tu fuerza y tu corazón. Eres el mejor ejemplo que pude tener en la vida. ¡Gracias por enseñarme tanto!' },
+    { icon: '🏡', title: 'Mi Lugar Favorito',      text: 'Mi lugar favorito en el mundo siempre será un abrazo tuyo. Gracias por darme la vida y llenarla de tanto amor.' }
+  ];
+  let available = [0,1,2,3], usedMessages = [];
+  function getRandomMsg() {
+    if (available.length === 0) { available = [...usedMessages]; usedMessages = []; }
+    const idx = Math.floor(Math.random() * available.length);
+    const msgIdx = available.splice(idx, 1)[0];
+    usedMessages.push(msgIdx);
+    return messages[msgIdx];
+  }
+  const boxWrapper = document.getElementById('boxWrapper');
+  const overlay    = document.getElementById('overlay');
+  const clickHint  = document.getElementById('clickHint');
+  let isOpen = false;
+  boxWrapper.addEventListener('click', (e) => { if (e.target.closest('.choco')) return; if (!isOpen) openBox(); });
+  function openBox() {
+    isOpen = true; boxWrapper.classList.add('box-open');
+    clickHint.style.opacity = '0'; clickHint.style.pointerEvents = 'none';
+    setTimeout(() => { clickHint.textContent = '💕 Elige un chocolate 💕'; clickHint.style.opacity = '0.8'; }, 900);
+  }
+  function closeBox() {
+    isOpen = false; boxWrapper.classList.remove('box-open');
+    clickHint.textContent = '✨ Haz clic en la caja para abrirla ✨';
+    clickHint.style.opacity = '0.8'; clickHint.style.pointerEvents = 'all';
+  }
+  document.querySelectorAll('.choco').forEach(choco => {
+    choco.addEventListener('click', (e) => {
+      e.stopPropagation(); if (!isOpen) return;
+      spawnSparkles(e.clientX, e.clientY); showMessage();
+    });
+  });
+  function showMessage() {
+    const msg = getRandomMsg();
+    document.getElementById('letterIcon').textContent = msg.icon;
+    document.getElementById('letterTitle').textContent = msg.title;
+    document.getElementById('letterText').textContent = msg.text;
+    overlay.classList.add('show');
+  }
+  document.getElementById('btnClose').addEventListener('click', () => {
+    overlay.classList.remove('show'); setTimeout(closeBox, 350);
+  });
+  function spawnSparkles(x, y) {
+    const emojis = ['✨','💖','🌸','⭐','💕','🌺'];
+    for (let i = 0; i < 8; i++) {
+      const s = document.createElement('div'); s.className = 'sparkle';
+      s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const angle = (i / 8) * 360, dist = 50 + Math.random() * 60;
+      const dx = Math.cos(angle * Math.PI / 180) * dist;
+      const dy = Math.sin(angle * Math.PI / 180) * dist;
+      s.style.left = (x + dx - 12) + 'px'; s.style.top = (y + dy - 12) + 'px';
+      s.style.animationDelay = (Math.random() * 0.2) + 's';
+      document.body.appendChild(s); setTimeout(() => s.remove(), 1100);
+    }
+  }
+</script>
+</body>
+</html>
